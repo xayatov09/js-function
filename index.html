@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>svetafor</title>
+       <style>
+        .light {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            border-radius: 50%;
+            background: #444;
+            opacity: 0.3;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #222;
+            position: relative;
+        }
+        .light.active {
+            opacity: 1;
+            color: #fff;
+        }
+        .timer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: inherit;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="traffic-light" style="width:120px; margin:40px auto;">
+        <div class="light red"><span class="timer"></span></div>
+        <div class="light yellow"><span class="timer"></span></div>
+        <div class="light green"><span class="timer"></span></div>
+    </div>
+    <script src="./app.js"></script>
+</body>
+
+</html>
