@@ -70,5 +70,5 @@ function showLight(step) {
     showLight((step + 1) % sequence.length);
   }, sequence[step].duration);
 }
-
 showLight(0);
+
