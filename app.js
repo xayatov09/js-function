@@ -37,57 +37,38 @@ const RandomColor = function (r = RandomNumber(), g = RandomNumber(), b = Random
     return `rgb(${r}, ${g}, ${b})`
 }
 
-// const colors = ['red', 'yellow', 'green']
+const colors = ['red', 'yellow', 'green']
 
 
-// setInterval(() => {
-//     document.querySelector('body').style.background = RandomColor()
-// }, 1000);
-// let i = 0
+setInterval(() => {
+    document.querySelector('body').style.background = RandomColor()
+}, 1000);
+let i = 0
 
-// setInterval(() => {
-//     document.querySelector('body').style.background = colors[i]
-//     i++
-//     if (i == 3) i = 0
-// }, 1000);
+setInterval(() => {
+    document.querySelector('body').style.background = colors[i]
+    i++
+    if (i == 3) i = 0
+}, 1000);
 
+console.log(RandomColor());
 console.log(RandomColor());
 
 const lights = document.querySelectorAll('.light');
-const timers = document.querySelectorAll('.timer');
 const sequence = [
-    { index: 0, duration: 5 }, // red (5 sekund)
-    { index: 1, duration: 2 }, // yellow (2 sekund)
-    { index: 2, duration: 5 }, // green (5 sekund)
-    { index: 1, duration: 2 }, // yellow (2 sekund)
+  { index: 0, duration: 3000 }, // red
+  { index: 1, duration: 1000 }, // yellow
+  { index: 2, duration: 3000 }, // green
+  { index: 1, duration: 1000 }, // yellow
 ];
 
-let step = 0;
-let timeLeft = sequence[step].duration;
-let intervalId;
-
-function updateLights() {
-    lights.forEach((light, i) => {
-        light.classList.toggle('active', i === sequence[step].index);
-        timers[i].textContent = i === sequence[step].index ? timeLeft : '';
-    });
+function showLight(step) {
+  lights.forEach((light, i) => {
+    light.classList.toggle('active', i === sequence[step].index);
+  });
+  setTimeout(() => {
+    showLight((step + 1) % sequence.length);
+  }, sequence[step].duration);
 }
 
-function nextStep() {
-    step = (step + 1) % sequence.length;
-    timeLeft = sequence[step].duration;
-    updateLights();
-}
-
-function tick() {
-    updateLights();
-    intervalId = setInterval(() => {
-        timeLeft--;
-        updateLights();
-        if (timeLeft === 0) {
-            nextStep();
-        }
-    }, 1000);
-}
-
-tick();
+showLight(0);
